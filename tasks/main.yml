@@ -13,6 +13,11 @@
 - name: install gitlab-ce
   shell: /tmp/install_gitlab-ce.sh
 
+- name: install gitlab-ce package
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - gitlab-ce
+
 - name: configure gitlab-ce
   shell: gitlab-ctl reconfigure
 
