@@ -1,11 +1,14 @@
 ---
 - name: install gitlab-ce dependencies packages
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - curl
-    - openssh-server
-    - ca-certificates
-    - postfix
+  apt:
+    name: {{ packages }}
+    state: latest
+  vars:
+    packages:
+      - curl
+      - openssh-server
+      - ca-certificates
+      - postfix
 
 - name: get gitlab-ce installer
   get_url: url=https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh dest=/tmp/install_gitlab-ce.sh mode="a+x"
@@ -14,9 +17,12 @@
   shell: /tmp/install_gitlab-ce.sh
 
 - name: install gitlab-ce package
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - gitlab-ce
+  apt:
+    name: {{ packages }}
+    state: latest
+  vars:
+    packages:
+      - gitlab-ce
 
 - name: configure gitlab-ce
   shell: gitlab-ctl reconfigure
