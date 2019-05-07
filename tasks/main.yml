@@ -1,7 +1,7 @@
 ---
 - name: install gitlab-ce dependencies packages
   apt:
-    name: {{ packages }}
+    name: "{{ packages }}"
     state: latest
   vars:
     packages:
@@ -18,7 +18,7 @@
 
 - name: install gitlab-ce package
   apt:
-    name: {{ packages }}
+    name: "{{ packages }}"
     state: latest
   vars:
     packages:
